@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "fastify": "^4.28.1",
     "mongodb": "^4.4.1",
     "prompt-sync": "^4.2.0"
   }
