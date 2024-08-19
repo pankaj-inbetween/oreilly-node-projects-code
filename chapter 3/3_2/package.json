@@ -13,7 +13,8 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "fastify": "^4.28.1",
-    "mongodb": "^4.4.1",
-    "prompt-sync": "^4.2.0"
+    "mongodb": "^6.8.0",
+    "prompt-sync": "^4.2.0",
+    "punycode": "^2.3.1"
   }
 }
