@@ -14,4 +14,4 @@ export default [
     description: 'A red roll with atmospheric sweetness',
     cost: 8.99
   },
-];
+]

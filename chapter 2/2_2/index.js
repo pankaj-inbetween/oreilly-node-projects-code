@@ -1,23 +1,26 @@
-import express from 'express';
-import workingHours from './data/workingHours.js';
-import menuItems from './data/menuItems.js';
-const app = express();
+import Fastify from "fastify";
+import workingHours from "./data/workingHours.js";
+import menuItems from "./data/menuItems.js";
+
+const app = Fastify();
 const port = 3000;
 
-app.set('view engine', 'ejs');
-
-app.get('/', (req, res) => {
-  res.render('pages/index');
+app.get("/", async (request, reply) => {
+  return "Welcome to What's Fare is Fair!";
 });
 
-app.get('/menu', (req, res) => {
-  res.render('pages/menu', menuItems);
+app.get("/menu", async (request, reply) => {
+  reply.send(menuItems);
 });
 
-app.get('/hours', (req, res) => {
-  res.render('pages/hours', workingHours);
+app.get("/hours", async (request, reply) => {
+  reply.send(workingHours);
 });
 
-app.listen(port, () => {
-  console.log(`Web Server is listening at localhost:${port}`);
+app.listen({ port }, (err, address) => {
+  if (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
+  console.log(`Web Server is listening at ${address}`);
 });

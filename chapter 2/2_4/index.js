@@ -1,25 +1,48 @@
-import express from 'express';
-import workingHours from './data/workingHours.js';
-import menuItems from './data/menuItems.js';
-const app = express();
-const port = 3000;
+import Fastify from "fastify";
+import workingHours from "./data/workingHours.js";
+import menuItems from "./data/menuItems.js";
+import ejs from "ejs";
+import fastifyView from "@fastify/view";
+import fastifyStatic from "@fastify/static";
+import { join } from "path";
 
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
-app.get('/', (req, res) => {
-  res.render('index', { name: `What's Fare is Fair` });
+const publicPath = join(process.cwd(), "public");
+
+const app = Fastify();
+
+app.register(fastifyStatic, {
+  root: publicPath,
+  prefix: "/public/",
 });
 
-app.get('/menu', (req, res) => {
-  res.render('menu', { menuItems });
+app.register(fastifyView, {
+  engine: {
+    ejs: ejs,
+  },
 });
 
-app.get('/hours', (req, res) => {
-  const days = [ 'monday', 'tuesday', 'wednesday',
-                'thursday', 'friday', 'saturday', 'sunday' ];
-  res.render('hours', { workingHours, days });
+app.get("/", (req, reply) => {
+  reply.view("views/index.ejs", { name: "What's Fare is Fair" });
 });
 
-app.listen(port, () => {
-  console.log(`Web Server is listening at localhost:${port}`);
+app.get("/menu", (req, reply) => {
+  reply.view("views/menu.ejs", { menuItems });
+});
+
+app.get("/hours", (req, reply) => {
+  const days = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ];
+  reply.view("views/hours.ejs", { workingHours, days });
+});
+
+app.listen({ port: 3000 }, (err, address) => {
+  if (err) throw err;
+  console.log(`Server running at ${address}`);
 });

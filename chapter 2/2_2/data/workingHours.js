@@ -1,10 +1,13 @@
 export default {
-  defaut: {
+  defaultHours: {
     open: 11,
     closed: 22,
   },
-  monday: null,
-  sunday:   {
+  monday: {
+    open: null,
+    closed: null,
+  },
+  sunday: {
     open: 12,
     closed: 20,
   },

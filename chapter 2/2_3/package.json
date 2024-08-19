@@ -10,7 +10,8 @@
   "author": "Jon Wexler",
   "license": "ISC",
   "dependencies": {
+    "@fastify/view": "^9.1.0",
     "ejs": "^3.1.6",
-    "express": "^4.17.2"
+    "fastify": "^4.28.1"
   }
 }

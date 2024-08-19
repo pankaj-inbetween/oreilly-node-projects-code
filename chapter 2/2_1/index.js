@@ -1,11 +1,15 @@
-import express from 'express';
-const app = express();
+import Fastify from "fastify";
+const app = Fastify();
 const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send(`Welcome to What's Fare is Fair!`);
+app.get("/", async (request, reply) => {
+  return "Welcome to What's Fare is Fair!";
 });
 
-app.listen(port, () => {
-  console.log(`Web Server is listening at localhost:${port}`);
+app.listen({ port }, (err, address) => {
+  if (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
+  console.log(`Web Server is listening at ${address}`);
 });

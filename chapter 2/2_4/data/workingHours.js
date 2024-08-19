@@ -1,11 +1,14 @@
 export default {
-  default: {
-    open: '11:00AM',
-    closed: '10:00PM',
+  defaultHours: {
+    open: 11,
+    closed: 22,
   },
-  monday: {},
-  sunday:   {
-    open: '12:00AM',
-    closed: '8:00PM',
+  monday: {
+    open: null,
+    closed: null,
+  },
+  sunday: {
+    open: 12,
+    closed: 20,
   },
 };
